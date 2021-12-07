@@ -17,17 +17,21 @@ int main(void){
     float *y;
     int N = 1<<20; 
 
-    // Allocate Unified Memory – accessible from CPU or GPU
+    // Allocating memory 
     cudaMallocManaged(&x, N*sizeof(float));
     cudaMallocManaged(&y, N*sizeof(float));
 
+    // initializing arrays on host device
     for (int i = 0; i < N; i++){
         x[i] = 1.0f;
         y[i] = 2.0f;
     }
-    
+
     // Run kernel on 1M elements on GPU
     add<<< 1, 1>>>(N, x, y);
+
+    // Waiting for GPU to finish
+    cudaDeviceSynchronize();
 
     float mError = 0.0f;
     // Checking for errors 
@@ -37,6 +41,7 @@ int main(void){
 
     std::cout << "Max Error: " << mError << std::endl;
 
+    // free memory 
     cudaFree(x);
     cudaFree(y);
     
