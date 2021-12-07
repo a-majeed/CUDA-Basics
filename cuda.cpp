@@ -31,5 +31,10 @@ int main(void){
 
     std::cout << "Max Error: " << mError << std::endl;
 
+    delete [] x;
+    delete [] y;
+
+    return 0;
+
 
 }
