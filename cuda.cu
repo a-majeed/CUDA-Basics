@@ -21,7 +21,7 @@ int main(void){
     cudaMallocManaged(&x, N*sizeof(float));
     cudaMallocManaged(&y, N*sizeof(float));
 
-    // initializing arrays on host device
+    // initializing arrays on host 
     for (int i = 0; i < N; i++){
         x[i] = 1.0f;
         y[i] = 2.0f;
